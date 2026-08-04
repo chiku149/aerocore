@@ -1,11 +1,12 @@
 ---
 import '../styles/global.css';
 const { title, description = 'VIOT — Virtual Ion-Optics Testbed Research' } = Astro.props;
+const base = import.meta.env.BASE_URL;
 const navLinks = [
-  { href: '/', label: 'Overview' },
-  { href: '/methods', label: 'Methods' },
-  { href: '/data', label: 'Data & Results' },
-  { href: '/about', label: 'People' },
+  { href: base, label: 'Overview' },
+  { href: `${base}methods/`, label: 'Methods' },
+  { href: `${base}data/`, label: 'Data & Results' },
+  { href: `${base}about/`, label: 'People' },
 ];
 ---
 <!DOCTYPE html>
