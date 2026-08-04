@@ -1,72 +1,83 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Reveal from '../components/Reveal.tsx';
 ---
-
-<BaseLayout title="Methods — VIOT Research">
-  <section class="py-16 md:py-24">
-    <Reveal>
-      <p class="kicker mb-4">Methodology</p>
-      <h1 class="heading-academic text-5xl md:text-6xl leading-tight">
-        Framework Architecture
-      </h1>
-      <p class="text-academic mt-6 text-xl max-w-3xl">
-        The Virtual Ion-Optics Testbed (VIOT) progressed through four phases. The production results are driven by the VIOT-3 (Axisymmetric) and VIOT-4 (3D + DSMC) frameworks.
-      </p>
-    </Reveal>
+<BaseLayout title="Methods — VIOT Research" description="VIOT-3 and VIOT-4 framework architecture.">
+  <section class="hero">
+    <p class="kicker">Methodology</p>
+    <h1>Framework Architecture</h1>
+    <div class="prose" style="margin-top:1.5rem;">
+      <p>The Virtual Ion-Optics Testbed progressed through four phases. Production results are driven by VIOT-3 (Axisymmetric) and VIOT-4 (3D + DSMC).</p>
+    </div>
   </section>
 
-  <section class="py-16 border-t border-edge">
-    <Reveal>
-      <h2 class="heading-academic text-3xl mb-8">Phase III: VIOT-3 (Axisymmetric)</h2>
-      <div class="grid md:grid-cols-2 gap-12">
-        <div class="text-academic space-y-4">
-          <p>
-            VIOT-3 is the production framework for the core erosion campaign. It models the barrel erosion mode (axisymmetric, inside aperture wall).
-          </p>
-          <ul class="list-disc pl-5 space-y-2">
-            <li><strong>Poisson Solver:</strong> SuperLU direct factorization (replaces non-convergent Red-Black SOR from VIOT-2).</li>
-            <li><strong>Plasma Push:</strong> True leapfrog with backward half-kick for stable E-field integration.</li>
-            <li><strong>Sputter Yield:</strong> 2D (Energy, θ) bilinear interpolation capturing geometric shadowing.</li>
-          </ul>
-        </div>
-        <div class="bg-panel border border-edge p-6 rounded-lg font-mono text-sm overflow-x-auto text-navy">
-          // 15 critical defects from Phase II corrected
-          // Defect 3: Post-CEX velocity
-          // Old: v = 0
-          // New: Maxwellian sampling at 400 K
-
-          // Defect 5: MCC double-counting
-          // Old: spurious collisions
-          // New: exact null-collision ratio
+  <section class="py-section border-top">
+    <h2>Phase III: VIOT-3 (Axisymmetric)</h2>
+    <div class="grid-2">
+      <div class="prose">
+        <p>VIOT-3 is the production framework for the core erosion campaign. It models barrel erosion (axisymmetric, inside aperture wall).</p>
+        <ul>
+          <li><strong>Poisson Solver:</strong> SuperLU direct factorization — replaces non-convergent Red-Black SOR from VIOT-2.</li>
+          <li><strong>Plasma Push:</strong> True leapfrog with backward half-kick for stable E-field integration.</li>
+          <li><strong>Sputter Yield:</strong> 2D (Energy, θ) bilinear interpolation capturing geometric shadowing.</li>
+          <li><strong>MCC:</strong> Correct null-collision ratio — fixes ν ∝ ν²Δt² error.</li>
+          <li><strong>Injection:</strong> Bohm drift at injection with thermal spread.</li>
+          <li><strong>Boundary:</strong> φ = V_screen upstream; plasma cells only for seeding.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>15 Defects Corrected from VIOT-2</h3>
+        <p class="text-small" style="margin-bottom:1rem;">The ten most critical (full list in manuscript Table 4):</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>#</th><th>Defect</th><th>Correction</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">1</td><td>CUDA Red-Black SOR block-sync errors</td><td>SuperLU direct factorization</td></tr>
+              <tr><td class="mono">2</td><td>Sputter-yield discarded angle axis</td><td>2D (E, θ) bilinear interpolation</td></tr>
+              <tr><td class="mono">3</td><td>Post-CEX velocity set to exactly 0</td><td>Maxwellian sampling at 400 K</td></tr>
+              <tr><td class="mono">4</td><td>Half-acceleration push</td><td>True leapfrog + backward half-kick</td></tr>
+              <tr><td class="mono">5</td><td>MCC double-counting</td><td>Correct null-collision ratio</td></tr>
+              <tr><td class="mono">6</td><td>ν_max at wrong n_gas</td><td>Recomputed from cross-section</td></tr>
+              <tr><td class="mono">7</td><td>Erosion ignored macroparticle weight</td><td>Y × w_real</td></tr>
+              <tr><td class="mono">8</td><td>Particles seeded inside solid cells</td><td>Plasma cells only</td></tr>
+              <tr><td class="mono">9</td><td>Upstream boundary φ=0</td><td>φ = V_screen</td></tr>
+              <tr><td class="mono">10</td><td>No Bohm drift at injection</td><td>u_B + thermal spread</td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
-    </Reveal>
+    </div>
   </section>
 
-  <section class="py-16 border-t border-edge">
-    <Reveal>
-      <h2 class="heading-academic text-3xl mb-8">Phase IV: VIOT-4 (3D + DSMC)</h2>
-      <div class="grid md:grid-cols-2 gap-12">
-        <div class="text-academic space-y-4">
-          <p>
-            VIOT-4 extends the framework to 3D to capture pit-and-groove erosion on the downstream face and interstitial web.
-          </p>
-          <ul class="list-disc pl-5 space-y-2">
-            <li><strong>DSMC Collision:</strong> No-Time-Counter (NTC) acceptance <code>P = σ·g·dt/V_cell</code>.</li>
-            <li><strong>Poisson Operator:</strong> Corrected Laplacian assembly (interior diag +6, off-diagonals -1, residual 1.7e−11).</li>
-            <li><strong>MD Pipeline:</strong> LAMMPS AIREBO crystalline MD for graphene substrate interactions.</li>
-          </ul>
-        </div>
-        <div class="bg-panel border border-edge p-6 rounded-lg text-sm">
-          <h3 class="font-sans font-bold text-ink mb-3">Verification Fixes (Adversarial Review)</h3>
-          <ol class="list-decimal pl-5 space-y-2 text-academic">
-            <li>MD projectile velocity unit conversion (1e-12 → 1e-2). 300 eV Xe verified at 210 Å/ps.</li>
-            <li>Sputter count isolated to type-1 (C) atoms.</li>
-            <li>Engine reinject modified to refill only inactive slots, preserving mid-flight ions.</li>
-          </ol>
-        </div>
+  <section class="py-section border-top">
+    <h2>Phase IV: VIOT-4 (3D + DSMC)</h2>
+    <div class="grid-2">
+      <div class="prose">
+        <p>VIOT-4 extends the framework to 3D to capture pit-and-groove erosion on the downstream face and interstitial web.</p>
+        <ul>
+          <li><strong>DSMC Collision:</strong> No-Time-Counter (NTC) acceptance P = σ·g·dt/V_cell.</li>
+          <li><strong>Poisson Operator:</strong> Corrected Laplacian assembly (interior diag +6, off-diagonals -1, residual 1.7e-11).</li>
+          <li><strong>MD Pipeline:</strong> LAMMPS AIREBO crystalline MD for graphene substrate interactions.</li>
+          <li><strong>3D Mesh:</strong> Hexahedral grid with proper aperture geometry.</li>
+        </ul>
       </div>
-    </Reveal>
+      <div>
+        <h3>Adversarial Review: 5 Bugs Found</h3>
+        <ol>
+          <li><strong>Poisson operator sign bug</strong> — x/y off-diagonals were +1, z were -1, assembling 6I + Nx + Ny - Nz, not a Laplacian. Fixed: all six off-diagonals -1.</li>
+          <li><strong>MD projectile velocity off by 10¹⁰</strong> — unit conversion applied ×1e-12 instead of ×1e-2. Fixed; verified 300 eV Xe → 210 Å/ps.</li>
+          <li><strong>Sputter count counted Xe as C</strong> — used total-atom delta. Fixed: count type-1 (C) atoms only.</li>
+          <li><strong>Engine reinject teleported all particles</strong> — reseeded every slot each step. Fixed: refill only inactive slots.</li>
+          <li><strong>DSMC collision not NTC</strong> — fixed p=0.3 with unused σ. Fixed: proper No-Time-Counter acceptance.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-section border-top">
+    <h2>VIOT-2 → VIOT-3 Impact Summary</h2>
+    <div class="callout" style="border-radius:12px; padding:2rem;">
+      <p class="kicker">Without these corrections</p>
+      <p style="margin-bottom:0;">All prior fields unreliable (#1), H3 could not manifest (#2), off-axis erosion underestimated (#3), E-field effectively halved (#4), 10× oversampling (#6), legacy erosion meaningless (#7).</p>
+    </div>
   </section>
 </BaseLayout>

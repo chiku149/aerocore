@@ -1,109 +1,80 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Reveal from '../components/Reveal.tsx';
-
-const campaignData = [
-  { throttle: 'TH0', ib: 0.51, mo: '6.827e10', gnp: '1.740e10', gr: '1.841e11', gnpLef: '3.92×', grLef: '0.37×' },
-  { throttle: 'TH5', ib: 0.84, mo: '1.124e12', gnp: '2.657e11', gr: '1.988e12', gnpLef: '4.23×', grLef: '0.57×' },
-  { throttle: 'TH10', ib: 1.10, mo: '4.435e12', gnp: '1.579e12', gr: '6.293e12', gnpLef: '2.81×', grLef: '0.70×' },
-  { throttle: 'TH15', ib: 1.76, mo: '3.730e13', gnp: '2.679e13', gr: '4.404e13', gnpLef: '1.39×', grLef: '0.85×' }
-];
-
-const fnData = [
-  { mat: 'Mo', phi: 4.6, lam: 100, k: 2.0, onset: '7.27 MV/m', pbd: 0.15 },
-  { mat: 'Graphene', phi: 4.5, lam: 150, k: 1.8, onset: '4.01 MV/m', pbd: 0.44 },
-  { mat: 'GNP', phi: 4.5, lam: 200, k: 1.5, onset: '2.26 MV/m', pbd: 0.58 }
-];
 ---
-
-<BaseLayout title="Data & Results — VIOT Research">
-  <section class="py-16 md:py-24">
-    <Reveal>
-      <p class="kicker mb-4">Results</p>
-      <h1 class="heading-academic text-5xl md:text-6xl leading-tight">
-        Data &amp; Findings
-      </h1>
-      <p class="text-academic mt-6 text-xl max-w-3xl">
-        Primary campaign results, EBS lifetime analysis, and Fowler-Nordheim breakdown risk assessment.
-      </p>
-    </Reveal>
+<BaseLayout title="Data & Results — VIOT Research" description="Campaign results, EBS lifetime analysis, and breakdown risk.">
+  <section class="hero">
+    <p class="kicker">Results</p>
+    <h1>Data & Findings</h1>
+    <div class="prose" style="margin-top:1.5rem;">
+      <p>Primary campaign results, EBS lifetime analysis, and Fowler-Nordheim breakdown risk assessment.</p>
+    </div>
   </section>
 
   <!-- Campaign -->
-  <section class="py-16 border-t border-edge">
-    <Reveal>
-      <h2 class="heading-academic text-3xl mb-4">Comparative Erosion Campaign</h2>
-      <p class="text-academic mb-8 max-w-4xl">
-        36 runs = 3 materials × 4 throttles × 3 seeds. N=1e5, stride 10, DX=10 µm, 5,000 steps. GNP benefit peaks at TH5 and decays monotonically to TH15.
-      </p>
-    </Reveal>
-    <Reveal delay={100}>
-      <div class="overflow-x-auto rounded-lg border border-edge">
-        <table class="table-academic">
-          <thead>
-            <tr>
-              <th>Throttle</th>
-              <th>I_b (A)</th>
-              <th>Mo (atoms)</th>
-              <th>GNP (atoms)</th>
-              <th>Graphene (atoms)</th>
-              <th class="text-navy">GNP LEF</th>
-              <th class="text-accent">Graphene LEF</th>
-            </tr>
-          </thead>
-          <tbody>
-            {campaignData.map(row => (
-              <tr>
-                <td class="font-mono">{row.throttle}</td>
-                <td class="font-mono">{row.ib}</td>
-                <td class="font-mono">{row.mo}</td>
-                <td class="font-mono">{row.gnp}</td>
-                <td class="font-mono">{row.gr}</td>
-                <td class="font-bold text-navy">{row.gnpLef}</td>
-                <td class="font-bold text-accent">{row.grLef}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </Reveal>
+  <section class="py-section border-top">
+    <h2>Comparative Erosion Campaign</h2>
+    <p class="prose" style="margin-bottom:1.5rem;">36 runs = 3 materials × 4 throttles × 3 seeds. N=1e5, stride 10, DX=10 µm, 5,000 steps, NX=221 domain. Full per-seed data in documentation file 02.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Throttle</th><th>I_b (A)</th><th>Mo (atoms)</th><th>GNP (atoms)</th><th>Graphene (atoms)</th><th class="text-navy">GNP LEF</th><th class="text-accent">Graphene LEF</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="mono">TH0</td><td class="mono">0.51</td><td class="mono">6.827e10</td><td class="mono">1.740e10</td><td class="mono">1.841e11</td><td class="text-navy">3.92×</td><td class="text-accent">0.37×</td></tr>
+          <tr><td class="mono">TH5</td><td class="mono">0.84</td><td class="mono">1.124e12</td><td class="mono">2.657e11</td><td class="mono">1.988e12</td><td class="text-navy">4.23×</td><td class="text-accent">0.57×</td></tr>
+          <tr><td class="mono">TH10</td><td class="mono">1.10</td><td class="mono">4.435e12</td><td class="mono">1.579e12</td><td class="mono">6.293e12</td><td class="text-navy">2.81×</td><td class="text-accent">0.70×</td></tr>
+          <tr><td class="mono">TH15</td><td class="mono">1.76</td><td class="mono">3.730e13</td><td class="mono">2.679e13</td><td class="mono">4.404e13</td><td class="text-navy">1.39×</td><td class="text-accent">0.85×</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-small" style="margin-top:1rem;">GNP reduces erosion <strong class="text-navy">1.39–4.23×</strong>; graphene <strong class="text-accent">worsens</strong> it (0.37–0.85×, i.e. up to 2.7× more mass loss). Cross-run CV &lt; 0.57% on all 12 cases.</p>
+    <p class="text-small" style="margin-top:0.5rem;">The GNP benefit peaks at TH5 and decays monotonically to TH15 — the shadowing advantage lives at grazing incidence; at higher throttle the CEX energy distribution shifts and normal-incidence yield dominates.</p>
+  </section>
+
+  <!-- EBS -->
+  <section class="py-section border-top">
+    <h2>Electron-Backstreaming Lifetime</h2>
+    <p class="prose" style="margin-bottom:1.5rem;">10-seed ensemble, N=2e5, TH10, NX=117 domain. The mission-relevant metric for end-of-life.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Coating</th><th>φ_m (V)</th><th>dφ_m/dr (V/m)</th><th>dr/dt (m/s)</th><th>dφ_m/dt (V/s)</th><th class="text-navy">LEF_EBS</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="mono">Mo</td><td class="mono">8.95</td><td class="mono">7.367e5</td><td class="mono">4.309e-8</td><td class="mono">3.148e-2</td><td class="mono">1.0×</td></tr>
+          <tr><td class="mono">GNP</td><td class="mono">8.95</td><td class="mono">7.367e5</td><td class="mono">3.270e-9</td><td class="mono">2.389e-3</td><td class="text-navy">13.18×</td></tr>
+          <tr><td class="mono">Graphene</td><td class="mono">8.85</td><td class="mono">7.367e5</td><td class="mono">6.382e-8</td><td class="mono">4.702e-2</td><td class="text-accent">0.669×</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-small" style="margin-top:1rem;">GNP extends EBS-limited life <strong class="text-navy">6.6× (gross yield) to 13.2× (net, f_redep=0.5)</strong>; graphene shortens it to 0.67×. Barrier depth = 1091.15 V.</p>
+    <p class="text-small" style="margin-top:0.5rem;"><strong>Internal cross-check:</strong> dφ_m/dr = 736,719.386 V/m is identical to machine precision across all three coatings — the barrier is set by electrode geometry, not surface material. 95% CI widths: ~0.5% of mean.</p>
   </section>
 
   <!-- FN Risk -->
-  <section class="py-16 border-t border-edge">
-    <Reveal>
-      <h2 class="heading-academic text-3xl mb-4">Fowler–Nordheim Breakdown Risk</h2>
-      <p class="text-academic mb-8 max-w-4xl">
-        GNP's edge-rich morphology drops measurable breakdown onset from ~7.3 to ~2.3 MV/m — <strong>potentially design-limiting</strong>.
-      </p>
-    </Reveal>
-    <Reveal delay={100}>
-      <div class="overflow-x-auto rounded-lg border border-edge">
-        <table class="table-academic">
-          <thead>
-            <tr>
-              <th>Material</th>
-              <th>φ (eV)</th>
-              <th>Weibull λ</th>
-              <th>Weibull k</th>
-              <th class="text-destructive">Onset (P>1e−4)</th>
-              <th>P_BD @ 15 MV/m</th>
-            </tr>
-          </thead>
-          <tbody>
-            {fnData.map(row => (
-              <tr>
-                <td class="font-bold">{row.mat}</td>
-                <td class="font-mono">{row.phi}</td>
-                <td class="font-mono">{row.lam}</td>
-                <td class="font-mono">{row.k}</td>
-                <td class="font-bold text-destructive">{row.onset}</td>
-                <td class="font-mono">{row.pbd}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </Reveal>
+  <section class="py-section border-top">
+    <h2>Fowler–Nordheim Breakdown Risk</h2>
+    <p class="prose" style="margin-bottom:1.5rem;">GNP's edge-rich morphology drops measurable breakdown onset — potentially design-limiting.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Material</th><th>φ (eV)</th><th>Weibull λ</th><th>Weibull k</th><th class="text-destructive">Onset (P>1e-4)</th><th>P_BD @ 15 MV/m</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="mono">Mo</td><td class="mono">4.6</td><td class="mono">100</td><td class="mono">2.0</td><td class="text-destructive">7.27 MV/m</td><td class="mono">0.15</td></tr>
+          <tr><td class="mono">Graphene</td><td class="mono">4.5</td><td class="mono">150</td><td class="mono">1.8</td><td class="text-destructive">4.01 MV/m</td><td class="mono">0.44</td></tr>
+          <tr><td class="mono">GNP</td><td class="mono">4.5</td><td class="mono">200</td><td class="mono">1.5</td><td class="text-destructive">2.26 MV/m</td><td class="mono">0.58</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-small" style="margin-top:1rem;">GNP drops breakdown onset from ~7.3 to ~2.3 MV/m. Context: NSTAR nominal inter-grid field ≈ 1.9 MV/m. Rim field enhancement (β ~2–10 for machined edges, ~70 for nanostructures) pushes local field into the 2.3–7.3 MV/m divergence band.</p>
+  </section>
+
+  <!-- Key Result -->
+  <section class="py-section border-top">
+    <div class="callout" style="border-radius:12px; padding:2rem;">
+      <p class="kicker">Summary</p>
+      <p>GNP is the clear winner for erosion mitigation (up to 4.23×) and EBS lifetime extension (up to 13.2×), but its edge morphology introduces a breakdown risk that drops onset to 2.26 MV/m. Graphene is actively harmful across all throttles — it adds an erosion channel instead of removing one.</p>
+    </div>
   </section>
 </BaseLayout>
