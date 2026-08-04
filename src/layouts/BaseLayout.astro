@@ -1,0 +1,66 @@
+---
+import '../styles/global.css';
+import NavScroller from '../components/NavScroller.tsx';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'VIOT — Virtual Ion-Optics Testbed Research' } = Astro.props;
+const navLinks = [
+  { href: '/', label: 'Overview' },
+  { href: '/methods', label: 'Methods (VIOT3/4)' },
+  { href: '/data', label: 'Data & Results' },
+  { href: '/about', label: 'People' },
+];
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Crimson+Pro:wght@400;500;600;700&family=Space+Grotesk:wght@500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="min-h-screen">
+    <header class="fixed inset-x-0 top-0 z-50">
+      <NavScroller client:idle>
+        <div class="mx-auto flex max-w-5xl items-center justify-between px-5 py-4 transition-[background,box-shadow,backdrop-filter] duration-300">
+          <a href="/" class="font-serif text-xl font-bold tracking-tight text-navy">
+            VIOT Research
+          </a>
+          <div class="hidden items-center gap-7 md:flex">
+            {
+              navLinks.map((l) => (
+                <a
+                  href={l.href}
+                  class="font-sans text-sm text-muted transition-colors hover:text-navy relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-full after:origin-left after:scale-x-0 after:bg-navy after:transition-transform after:duration-300 hover:after:scale-x-100"
+                >
+                  {l.label}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </NavScroller>
+    </header>
+
+    <main class="mx-auto max-w-5xl px-5 pt-28 pb-24">
+      <slot />
+    </main>
+
+    <footer class="border-t border-edge bg-panel">
+      <div class="mx-auto flex max-w-5xl flex-col gap-3 px-5 py-8 text-sm text-muted sm:flex-row sm:items-center sm:justify-between">
+        <span class="font-sans">© 2026 VIOT Research Program.</span>
+        <span class="font-mono text-xs uppercase tracking-widest text-navy/60">Data is open</span>
+      </div>
+    </footer>
+  </body>
+</html>

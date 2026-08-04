@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Reveal from '../components/Reveal.tsx';
+
+const hypotheses = [
+  { id: 'H1', stmt: 'GNP and/or graphene coatings reduce accelerator-grid erosion', verdict: 'Partially confirmed', evidence: 'GNP reduces erosion 1.39–4.23×. Graphene worsens it (0.37–0.85×).' },
+  { id: 'H2', stmt: 'Graphene "transparency" diminishes; penetrative energy transfer dominates', verdict: 'Confirmed, sign reversed', evidence: 'Heavy Xe passes through monolayer, ejecting C and sputtering Mo substrate.' },
+  { id: 'H3', stmt: 'GNP nanoscale roughness geometrically shadows grazing-angle flux', verdict: 'Confirmed', evidence: 'Reproduces suppression of 60–75° Mo yield peak.' },
+  { id: 'H4', stmt: 'GNP edge-rich morphology elevates field-emission risk', verdict: 'Design-limiting', evidence: 'Onset drops from 7.3 to 2.3 MV/m.' },
+];
+---
+
+<BaseLayout title="VIOT — Virtual Ion-Optics Testbed">
+  <!-- Hero -->
+  <section class="py-16 md:py-24">
+    <Reveal>
+      <p class="kicker mb-4">Project Overview</p>
+      <h1 class="heading-academic text-5xl md:text-7xl leading-tight">
+        Virtual Ion-Optics Testbed <span class="text-accent">(VIOT)</span>
+      </h1>
+      <p class="text-academic mt-6 text-xl max-w-3xl">
+        A multiscale assessment of carbon-nanomaterial accelerator-grid coatings for charge-exchange (CEX) erosion mitigation in the NASA NSTAR ion thruster.
+      </p>
+    </Reveal>
+  </section>
+
+  <!-- Problem -->
+  <section class="py-16 border-t border-edge">
+    <div class="grid md:grid-cols-[1fr_2fr] gap-12">
+      <Reveal>
+        <h2 class="heading-academic text-3xl">The Problem</h2>
+      </Reveal>
+      <Reveal delay={100}>
+        <div class="text-academic space-y-4">
+          <p>
+            Gridded ion thrusters accelerate Xe⁺ electrostatically. Fast beam ions undergo resonant charge exchange with slow neutrals, creating slow CEX ions born inside the accelerating field. These are pulled into the negatively biased accelerator grid, sputtering it. This is the <strong>dominant end-of-life mechanism</strong>.
+          </p>
+          <p>
+            Our research asks: Can thin nanostructured carbon coatings on a conventional Mo grid capture the sputter resistance of bulk carbon grids, without the structural/thermal penalties?
+          </p>
+        </div>
+      </Reveal>
+    </div>
+  </section>
+
+  <!-- Hypotheses -->
+  <section class="py-16 border-t border-edge">
+    <Reveal>
+      <h2 class="heading-academic text-3xl mb-8">Core Hypotheses</h2>
+    </Reveal>
+    <div class="grid gap-6">
+      {hypotheses.map((h, i) => (
+        <Reveal delay={i * 100}>
+          <div class="bg-panel border border-edge p-6 rounded-lg grid md:grid-cols-[auto_1fr_1fr] gap-6 items-start hover:shadow-md transition-shadow">
+            <span class="font-mono text-xl font-bold text-navy">{h.id}</span>
+            <div>
+              <p class="font-sans font-bold text-ink">{h.stmt}</p>
+            </div>
+            <div>
+              <span class={`inline-block px-3 py-1 text-xs font-bold uppercase tracking-wider rounded-full mb-2 ${h.verdict.includes('Confirmed') ? 'bg-navy/10 text-navy' : 'bg-accent/10 text-accent'}`}>
+                {h.verdict}
+              </span>
+              <p class="text-academic text-sm">{h.evidence}</p>
+            </div>
+          </div>
+        </Reveal>
+      ))}
+    </div>
+  </section>
+
+  <!-- Key Finding -->
+  <section class="py-16 border-t border-edge">
+    <div class="bg-navy text-white p-8 md:p-12 rounded-2xl">
+      <Reveal>
+        <p class="kicker text-edge mb-4">Key Insight</p>
+        <h2 class="heading-academic text-3xl md:text-4xl text-white mb-6">H2 Reversal: The Graphene Paradox</h2>
+        <p class="text-lg leading-relaxed text-white/90 max-w-3xl">
+          Intuition suggests an ultra-hard 2D coating should protect the substrate. Crystalline MD shows the opposite. A heavy Xe ion at CEX energies passes <em>through</em> the monolayer, depositing momentum in the Mo substrate; the low-thermal-coupling sheet cannot dissipate the cascade, so it ejects several carbon atoms per impact <em>and</em> the substrate sputters through it. <strong>The coating adds an erosion channel instead of removing one.</strong>
+        </p>
+      </Reveal>
+    </div>
+  </section>
+</BaseLayout>

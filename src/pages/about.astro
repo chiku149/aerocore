@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Reveal from '../components/Reveal.tsx';
+---
+
+<BaseLayout title="People — VIOT Research">
+  <section class="py-16 md:py-24">
+    <Reveal>
+      <p class="kicker mb-4">People</p>
+      <h1 class="heading-academic text-5xl md:text-6xl leading-tight">
+        Principal Investigator
+      </h1>
+    </Reveal>
+  </section>
+
+  <section class="py-16 border-t border-edge">
+    <div class="grid md:grid-cols-[1fr_2fr] gap-12 items-start">
+      <Reveal>
+        <div class="bg-panel-2 aspect-square rounded-2xl border border-edge mb-6 flex items-center justify-center">
+          <span class="font-serif text-6xl text-navy/20">SP</span>
+        </div>
+        <h2 class="heading-academic text-2xl">Shantanu Pawar</h2>
+        <p class="text-sm text-muted font-sans mt-2">Dept. of Mechanical Engineering<br>PVG's College of Engineering, Technology and Management<br>Pune, Maharashtra, India</p>
+      </Reveal>
+
+      <Reveal delay={100}>
+        <div class="text-academic space-y-6 text-lg">
+          <p>
+            I am the sole author of the Virtual Ion-Optics Testbed (VIOT) research program. The work focuses on the multiscale assessment of carbon-nanomaterial accelerator-grid coatings for charge-exchange (CEX) erosion mitigation in the NASA NSTAR ion thruster.
+          </p>
+          <p>
+            My research combines:
+          </p>
+          <ul class="list-disc pl-5 space-y-2">
+            <li><strong>Plasma Physics:</strong> GPU PIC-MCC (Particle-in-Cell with Monte Carlo Collisions) simulations.</li>
+            <li><strong>Atomistic Modeling:</strong> LAMMPS AIREBO crystalline Molecular Dynamics for ion-surface interactions.</li>
+            <li><strong>Computational Engineering:</strong> Custom 3D Poisson solvers and DSMC (Direct Simulation Monte Carlo) pipelines.</li>
+          </ul>
+          <p class="mt-8 pt-8 border-t border-edge">
+            <strong>Compiled:</strong> August 2026<br>
+            <strong>Status:</strong> VIOT-3 complete (70/70 tests), VIOT-4 core complete, consolidated manuscript complete (35 pp).
+          </p>
+        </div>
+      </Reveal>
+    </div>
+  </section>
+</BaseLayout>

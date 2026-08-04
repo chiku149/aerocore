@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+@theme {
+  /* UI/UX Pro Max: Academic / Swiss Modernism 2.0 */
+  --font-sans: "Atkinson Hyperlegible", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Crimson Pro", ui-serif, Georgia, serif;
+  --font-mono: "Space Grotesk", ui-monospace, monospace;
+
+  /* Trust & Authority Palette */
+  --color-bg: #F8FAFC;
+  --color-panel: #FFFFFF;
+  --color-panel-2: #F1F5F9;
+  --color-edge: #CBD5E1;
+  --color-ink: #0F172A;
+  --color-muted: #64748B;
+  --color-navy: #1E3A5F;
+  --color-accent: #A16207;
+  --color-destructive: #DC2626;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snappy: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-bg);
+}
+
+body {
+  @apply bg-bg text-ink font-sans antialiased selection:bg-navy selection:text-white;
+}
+
+/* thin custom scrollbar */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+/* grid overlay - muted for light theme */
+.grid-field {
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Academic Typography Elements */
+.heading-academic {
+  @apply font-serif font-semibold tracking-tight text-navy;
+}
+.text-academic {
+  @apply font-sans leading-relaxed text-ink/90;
+}
+.kicker {
+  @apply text-xs uppercase tracking-[0.2em] text-accent font-sans font-bold;
+}
+
+/* Academic Tables */
+.table-academic {
+  @apply w-full text-left text-sm border-collapse;
+}
+.table-academic th {
+  @apply border-b-2 border-ink py-3 px-4 font-sans font-bold text-ink bg-panel-2;
+}
+.table-academic td {
+  @apply border-b border-edge py-3 px-4 text-ink font-sans;
+}
+.table-academic tr:hover td {
+  @apply bg-panel-2/50 transition-colors;
+}
+
+/* nav scrolled state */
+.nav--scrolled {
+  background: rgba(248, 250, 252, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 var(--color-edge);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
