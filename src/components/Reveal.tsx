@@ -26,9 +26,8 @@ export default function Reveal({ children, delay = 0, y = 16, className }: Revea
   return (
     <div
       ref={ref}
-      className={className}
+      className={`${className || ''} ${shown ? '' : 'reveal-init'}`}
       style={{
-        opacity: shown ? 1 : 0,
         transform: shown ? 'none' : `translateY(${y}px)`,
         transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
         transitionDelay: `${delay}ms`,

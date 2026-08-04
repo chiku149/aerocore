@@ -77,6 +77,10 @@ body {
   box-shadow: 0 1px 0 var(--color-edge);
 }
 
+.reveal-init {
+  opacity: 0;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *,
