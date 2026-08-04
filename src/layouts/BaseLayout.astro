@@ -62,5 +62,41 @@ const navLinks = [
         <span class="font-mono text-xs uppercase tracking-widest text-navy/60">Data is open</span>
       </div>
     </footer>
+
+    <script>
+      import { animate, inView } from 'motion';
+
+      // Handle all data-reveal elements globally
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const reveals = document.querySelectorAll<HTMLElement>('[data-reveal]');
+
+      reveals.forEach((el) => {
+        if (reduced) {
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+          return;
+        }
+
+        const delay = parseInt(el.dataset.revealDelay || '0', 10) / 1000;
+
+        inView(el, () => {
+          animate(el,
+            { opacity: [0, 1], transform: ['none', 'none'] },
+            { duration: 0.8, delay, ease: 'easeOut' }
+          );
+          // We manually handle the Y transform to match the initial CSS state
+          const y = el.dataset.revealY || '16';
+          el.animate([
+            { transform: `translateY(${y}px)` },
+            { transform: 'translateY(0px)' }
+          ], {
+            duration: 800,
+            delay: delay * 1000,
+            easing: 'ease-out',
+            fill: 'forwards'
+          });
+        }, { amount: 0.2 });
+      });
+    </script>
   </body>
 </html>

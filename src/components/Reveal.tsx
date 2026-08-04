@@ -1,5 +1,4 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react';
-import { inView } from 'motion';
+import type { ReactNode } from 'react';
 
 interface RevealProps {
   children: ReactNode;
@@ -9,28 +8,19 @@ interface RevealProps {
 }
 
 /**
- * Fade/slide reveal on enter (motion.dev inView).
- * Academic styling: gentler ease, shorter travel.
+ * Astro-friendly Reveal component.
+ * Renders static HTML with data attributes. A global script in BaseLayout
+ * handles the actual IntersectionObserver/Motion logic.
  */
 export default function Reveal({ children, delay = 0, y = 16, className }: RevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [shown, setShown] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const stop = inView(el, () => setShown(true), { amount: 0.2 });
-    return stop;
-  }, []);
-
   return (
     <div
-      ref={ref}
-      className={`${className || ''} ${shown ? '' : 'reveal-init'}`}
+      data-reveal
+      data-reveal-delay={delay}
+      data-reveal-y={y}
+      className={`${className || ''} opacity-0`}
       style={{
-        transform: shown ? 'none' : `translateY(${y}px)`,
-        transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
-        transitionDelay: `${delay}ms`,
+        transform: `translateY(${y}px)`,
         willChange: 'opacity, transform',
       }}
     >
