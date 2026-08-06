@@ -98,6 +98,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <script>
     import gsap from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+    import { TextPlugin } from 'gsap/TextPlugin';
+    gsap.registerPlugin(ScrollTrigger, TextPlugin);
+
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       // 1. Hero diffraction assemble
       gsap.fromTo('.hero h1 .char',

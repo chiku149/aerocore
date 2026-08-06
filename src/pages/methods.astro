@@ -170,6 +170,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <script>
     import gsap from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+    gsap.registerPlugin(ScrollTrigger);
+
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       gsap.utils.toArray('.timeline-item').forEach((item: any, i: number) => {
         gsap.fromTo(item,

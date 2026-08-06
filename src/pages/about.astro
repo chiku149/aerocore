@@ -82,6 +82,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   <script>
     import gsap from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+    gsap.registerPlugin(ScrollTrigger);
+
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       document.querySelectorAll('[data-gsap="table"]').forEach((table) => {
         const rows = table.querySelectorAll('tbody tr');
