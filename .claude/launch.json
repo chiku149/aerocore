@@ -4,7 +4,7 @@
     {
       "name": "VIOT dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--", "--port", "4173"],
+      "runtimeArgs": ["run", "dev", "--", "--port", "4173", "--force"],
       "port": 4173
     }
   ]
