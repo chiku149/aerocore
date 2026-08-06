@@ -1,13 +1,7 @@
 ---
 import '../styles/global.css';
-const { title, description = 'VIOT — Virtual Ion-Optics Testbed Research' } = Astro.props;
+const { title, description = 'VIOT — Virtual Ion-Optics Testbed Research', page = '' } = Astro.props;
 const base = import.meta.env.BASE_URL;
-const navLinks = [
-  { href: base, label: 'Overview' },
-  { href: `${base}methods/`, label: 'Methods' },
-  { href: `${base}data/`, label: 'Data & Results' },
-  { href: `${base}about/`, label: 'People' },
-];
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -15,25 +9,57 @@ const navLinks = [
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content={description} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta name="theme-color" content="#F4F4F0" />
   <title>{title}</title>
 </head>
 <body>
-  <nav class="nav">
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <nav class="nav" aria-label="Site navigation">
     <div class="nav-inner">
-      <a href="/" class="nav-logo">VIOT Research</a>
+      <a href={base} class="nav-logo" aria-label="VIOT Research — home">VIOT</a>
       <div class="nav-links">
-        {navLinks.map((l) => <a href={l.href}>{l.label}</a>)}
+        <a href={base} aria-current={page === 'home' ? 'page' : undefined}>Overview</a>
+        <a href={`${base}methods/`} aria-current={page === 'methods' ? 'page' : undefined}>Methods</a>
+        <a href={`${base}data/`} aria-current={page === 'data' ? 'page' : undefined}>Data &amp; Results</a>
+        <a href={`${base}about/`} aria-current={page === 'about' ? 'page' : undefined}>People</a>
       </div>
+      <span class="nav-badge">Open Research</span>
     </div>
   </nav>
-  <main class="container" style="padding-top:3rem;padding-bottom:4rem;">
+
+  <main id="main">
     <slot />
   </main>
-  <footer class="footer">
+
+  <footer>
     <div class="footer-inner">
-      <span>© 2026 VIOT Research Program.</span>
-      <span class="footer-right">Data is open</span>
+      <span class="footer-logo">VIOT Research</span>
+      <span class="footer-copy">© 2026 Shantanu Pawar — PVG's COETM Pune</span>
+      <span class="footer-open">Data is Open</span>
     </div>
   </footer>
+
+  <script>
+    import gsap from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+    import { TextPlugin } from 'gsap/TextPlugin';
+
+    gsap.registerPlugin(ScrollTrigger, TextPlugin);
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) {
+      // Ensure everything is visible immediately
+      document.querySelectorAll('[data-gsap]').forEach(el => {
+        (el as HTMLElement).style.opacity = '1';
+        (el as HTMLElement).style.transform = 'none';
+      });
+    } else {
+      window.__gsap = gsap;
+      window.__ST = ScrollTrigger;
+    }
+  </script>
 </body>
 </html>

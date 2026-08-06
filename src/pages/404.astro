@@ -1,0 +1,24 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL;
+---
+<BaseLayout title="404 — Not Found" page="">
+  <div class="container">
+    <section class="hero" style="min-height:60vh;display:flex;flex-direction:column;justify-content:center;">
+      <p class="hero-eyebrow" style="color:var(--accent);">Error 404</p>
+      <h1 style="color:var(--accent);">NOT FOUND</h1>
+      <p class="hero-sub" style="margin-top:1.5rem;">
+        The page you requested does not exist. If you followed a link, it may be outdated.
+      </p>
+      <div style="margin-top:3rem;border-top:var(--border);padding-top:2rem;">
+        <p style="font-family:var(--font-mono);font-size:var(--size-label);letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;">Return to</p>
+        <div style="display:flex;gap:0;flex-wrap:wrap;">
+          <a href={base} style="font-family:var(--font-mono);font-size:var(--size-label);letter-spacing:0.18em;text-transform:uppercase;padding:0.75rem 1.5rem;border:var(--border);margin-right:-1px;text-decoration:none;color:var(--fg);transition:background 0.15s,color 0.15s;" onmouseover="this.style.background='var(--fg)';this.style.color='var(--bg)';" onmouseout="this.style.background='';this.style.color='var(--fg)';">Overview</a>
+          <a href={`${base}methods/`} style="font-family:var(--font-mono);font-size:var(--size-label);letter-spacing:0.18em;text-transform:uppercase;padding:0.75rem 1.5rem;border:var(--border);margin-right:-1px;text-decoration:none;color:var(--fg);transition:background 0.15s,color 0.15s;" onmouseover="this.style.background='var(--fg)';this.style.color='var(--bg)';" onmouseout="this.style.background='';this.style.color='var(--fg)';">Methods</a>
+          <a href={`${base}data/`} style="font-family:var(--font-mono);font-size:var(--size-label);letter-spacing:0.18em;text-transform:uppercase;padding:0.75rem 1.5rem;border:var(--border);margin-right:-1px;text-decoration:none;color:var(--fg);transition:background 0.15s,color 0.15s;" onmouseover="this.style.background='var(--fg)';this.style.color='var(--bg)';" onmouseout="this.style.background='';this.style.color='var(--fg)';">Data</a>
+          <a href={`${base}about/`} style="font-family:var(--font-mono);font-size:var(--size-label);letter-spacing:0.18em;text-transform:uppercase;padding:0.75rem 1.5rem;border:var(--border);text-decoration:none;color:var(--fg);transition:background 0.15s,color 0.15s;" onmouseover="this.style.background='var(--fg)';this.style.color='var(--bg)';" onmouseout="this.style.background='';this.style.color='var(--fg)';">People</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

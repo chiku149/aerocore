@@ -1,83 +1,185 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="Methods — VIOT Research" description="VIOT-3 and VIOT-4 framework architecture.">
-  <section class="hero">
-    <p class="kicker">Methodology</p>
-    <h1>Framework Architecture</h1>
-    <div class="prose" style="margin-top:1.5rem;">
-      <p>The Virtual Ion-Optics Testbed progressed through four phases. Production results are driven by VIOT-3 (Axisymmetric) and VIOT-4 (3D + DSMC).</p>
-    </div>
-  </section>
+<BaseLayout title="Methods — VIOT Research" page="methods" description="VIOT-3 axisymmetric and VIOT-4 3D+DSMC framework architecture.">
+  <div class="container">
+    <section class="hero">
+      <p class="hero-eyebrow">Methodology</p>
+      <h1>Framework Architecture</h1>
+      <p class="hero-sub">The Virtual Ion-Optics Testbed progressed through five phases. Production results are driven by VIOT-3 (axisymmetric) and VIOT-4 (3D + DSMC + MD).</p>
+    </section>
 
-  <section class="py-section border-top">
-    <h2>Phase III: VIOT-3 (Axisymmetric)</h2>
-    <div class="grid-2">
-      <div class="prose">
-        <p>VIOT-3 is the production framework for the core erosion campaign. It models barrel erosion (axisymmetric, inside aperture wall).</p>
-        <ul>
-          <li><strong>Poisson Solver:</strong> SuperLU direct factorization — replaces non-convergent Red-Black SOR from VIOT-2.</li>
-          <li><strong>Plasma Push:</strong> True leapfrog with backward half-kick for stable E-field integration.</li>
-          <li><strong>Sputter Yield:</strong> 2D (Energy, θ) bilinear interpolation capturing geometric shadowing.</li>
-          <li><strong>MCC:</strong> Correct null-collision ratio — fixes ν ∝ ν²Δt² error.</li>
-          <li><strong>Injection:</strong> Bohm drift at injection with thermal spread.</li>
-          <li><strong>Boundary:</strong> φ = V_screen upstream; plasma cells only for seeding.</li>
-        </ul>
-      </div>
-      <div>
-        <h3>15 Defects Corrected from VIOT-2</h3>
-        <p class="text-small" style="margin-bottom:1rem;">The ten most critical (full list in manuscript Table 4):</p>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>#</th><th>Defect</th><th>Correction</th></tr></thead>
-            <tbody>
-              <tr><td class="mono">1</td><td>CUDA Red-Black SOR block-sync errors</td><td>SuperLU direct factorization</td></tr>
-              <tr><td class="mono">2</td><td>Sputter-yield discarded angle axis</td><td>2D (E, θ) bilinear interpolation</td></tr>
-              <tr><td class="mono">3</td><td>Post-CEX velocity set to exactly 0</td><td>Maxwellian sampling at 400 K</td></tr>
-              <tr><td class="mono">4</td><td>Half-acceleration push</td><td>True leapfrog + backward half-kick</td></tr>
-              <tr><td class="mono">5</td><td>MCC double-counting</td><td>Correct null-collision ratio</td></tr>
-              <tr><td class="mono">6</td><td>ν_max at wrong n_gas</td><td>Recomputed from cross-section</td></tr>
-              <tr><td class="mono">7</td><td>Erosion ignored macroparticle weight</td><td>Y × w_real</td></tr>
-              <tr><td class="mono">8</td><td>Particles seeded inside solid cells</td><td>Plasma cells only</td></tr>
-              <tr><td class="mono">9</td><td>Upstream boundary φ=0</td><td>φ = V_screen</td></tr>
-              <tr><td class="mono">10</td><td>No Bohm drift at injection</td><td>u_B + thermal spread</td></tr>
-            </tbody>
-          </table>
+    <section>
+      <div class="section-inner">
+        <div class="section-label-col"><h2 class="label">Phase III</h2></div>
+        <div>
+          <p class="phase-tag phase-tag--done">Complete — 70/70 tests</p>
+          <h3 class="section-title">VIOT-3: Axisymmetric</h3>
+          <div class="prose-block">
+            <p>Production framework for the core erosion campaign. Models barrel erosion — axisymmetric, inside aperture wall. Corrects all 15 defects identified in VIOT-2.</p>
+          </div>
+
+          <div style="margin-top:2.5rem;">
+            <p class="label">Physics implementation</p>
+            <div class="defect-table">
+              <div class="defect-head">
+                <div>#</div>
+                <div>Defect in VIOT-2</div>
+                <div>Correction in VIOT-3</div>
+              </div>
+              <div class="defect-row">
+                <div class="defect-num">1</div>
+                <div>CUDA Red–Black SOR Poisson had block-sync errors, non-convergent</div>
+                <div>SuperLU direct factorization</div>
+              </div>
+              <div class="defect-row">
+                <div class="defect-num">2</div>
+                <div>Sputter-yield lookup discarded the angle axis</div>
+                <div>2D (E, θ) bilinear interpolation</div>
+              </div>
+              <div class="defect-row">
+                <div class="defect-num">3</div>
+                <div>Post-CEX velocity set to exactly 0</div>
+                <div>Maxwellian sampling at 400 K</div>
+              </div>
+              <div class="defect-row">
+                <div class="defect-num">4</div>
+                <div>Half-acceleration push (not leapfrog)</div>
+                <div>True leapfrog + backward half-kick</div>
+              </div>
+              <div class="defect-row">
+                <div class="defect-num">5</div>
+                <div>MCC double-counting</div>
+                <div>Correct null-collision ratio</div>
+              </div>
+              <div class="defect-row">
+                <div class="defect-num">6</div>
+                <div>ν_max computed at wrong n_gas</div>
+                <div>Recomputed from cross-section</div>
+              </div>
+              <div class="defect-row">
+                <div class="defect-num">7</div>
+                <div>Erosion ignored macroparticle weight</div>
+                <div>Y × w_real</div>
+              </div>
+              <div class="defect-row">
+                <div class="defect-num">8</div>
+                <div>Particles seeded inside solid cells</div>
+                <div>Plasma cells only</div>
+              </div>
+              <div class="defect-row">
+                <div class="defect-num">9</div>
+                <div>Upstream boundary φ = 0</div>
+                <div>φ = V_screen</div>
+              </div>
+              <div class="defect-row">
+                <div class="defect-num">10</div>
+                <div>No Bohm drift at injection</div>
+                <div>u_B + thermal spread</div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="py-section border-top">
-    <h2>Phase IV: VIOT-4 (3D + DSMC)</h2>
-    <div class="grid-2">
-      <div class="prose">
-        <p>VIOT-4 extends the framework to 3D to capture pit-and-groove erosion on the downstream face and interstitial web.</p>
-        <ul>
-          <li><strong>DSMC Collision:</strong> No-Time-Counter (NTC) acceptance P = σ·g·dt/V_cell.</li>
-          <li><strong>Poisson Operator:</strong> Corrected Laplacian assembly (interior diag +6, off-diagonals -1, residual 1.7e-11).</li>
-          <li><strong>MD Pipeline:</strong> LAMMPS AIREBO crystalline MD for graphene substrate interactions.</li>
-          <li><strong>3D Mesh:</strong> Hexahedral grid with proper aperture geometry.</li>
-        </ul>
-      </div>
-      <div>
-        <h3>Adversarial Review: 5 Bugs Found</h3>
-        <ol>
-          <li><strong>Poisson operator sign bug</strong> — x/y off-diagonals were +1, z were -1, assembling 6I + Nx + Ny - Nz, not a Laplacian. Fixed: all six off-diagonals -1.</li>
-          <li><strong>MD projectile velocity off by 10¹⁰</strong> — unit conversion applied ×1e-12 instead of ×1e-2. Fixed; verified 300 eV Xe → 210 Å/ps.</li>
-          <li><strong>Sputter count counted Xe as C</strong> — used total-atom delta. Fixed: count type-1 (C) atoms only.</li>
-          <li><strong>Engine reinject teleported all particles</strong> — reseeded every slot each step. Fixed: refill only inactive slots.</li>
-          <li><strong>DSMC collision not NTC</strong> — fixed p=0.3 with unused σ. Fixed: proper No-Time-Counter acceptance.</li>
-        </ol>
-      </div>
-    </div>
-  </section>
+    <section>
+      <div class="section-inner">
+        <div class="section-label-col"><h2 class="label">Phase IV</h2></div>
+        <div>
+          <p class="phase-tag phase-tag--active">Core complete — 2/2 tests</p>
+          <h3 class="section-title">VIOT-4: 3D + DSMC + MD</h3>
+          <div class="prose-block">
+            <p>Extends the framework to 3D to capture pit-and-groove erosion on the downstream face and interstitial web. Integrates DSMC neutral flow and LAMMPS AIREBO crystalline MD for graphene substrate interactions.</p>
+          </div>
 
-  <section class="py-section border-top">
-    <h2>VIOT-2 → VIOT-3 Impact Summary</h2>
-    <div class="callout" style="border-radius:12px; padding:2rem;">
-      <p class="kicker">Without these corrections</p>
-      <p style="margin-bottom:0;">All prior fields unreliable (#1), H3 could not manifest (#2), off-axis erosion underestimated (#3), E-field effectively halved (#4), 10× oversampling (#6), legacy erosion meaningless (#7).</p>
-    </div>
-  </section>
+          <div style="margin-top:2.5rem;">
+            <p class="label">Adversarial review: 5 bugs found and fixed</p>
+            <div class="timeline" data-gsap="timeline">
+              <div class="timeline-item">
+                <span class="timeline-num">01</span>
+                <div>
+                  <p class="timeline-title">Poisson operator sign bug</p>
+                  <p class="timeline-body">x/y off-diagonals were +1, z were −1, assembling 6I + Nx + Ny − Nz — not a Laplacian. CG "converged" to the wrong operator. Fixed: all six off-diagonals −1. Verified: residual 1.7e-11.</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <span class="timeline-num">02</span>
+                <div>
+                  <p class="timeline-title">MD projectile velocity off by 10¹⁰</p>
+                  <p class="timeline-body">Unit conversion applied ×1e-12 instead of ×1e-2. Projectiles were effectively stationary → ~zero sputter. Fixed; verified 300 eV Xe → 210 Å/ps.</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <span class="timeline-num">03</span>
+                <div>
+                  <p class="timeline-title">Sputter count counted Xe as C</p>
+                  <p class="timeline-body">Used total-atom delta, tallying exiting Xe projectiles as sputtered carbon. Fixed: count type-1 (C) atoms only via per-atom type array.</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <span class="timeline-num">04</span>
+                <div>
+                  <p class="timeline-title">Engine reinject teleported all particles</p>
+                  <p class="timeline-body">Reseeded every slot each step, discarding mid-flight ions. Erosion was 19 atoms instead of ~1e8. Fixed: refill only inactive slots.</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <span class="timeline-num">05</span>
+                <div>
+                  <p class="timeline-title">DSMC collision not NTC</p>
+                  <p class="timeline-body">Fixed p=0.3 with unused σ, no cell-volume/dt scaling. Fixed: proper No-Time-Counter acceptance P = σ·g·dt/V_cell.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-inner">
+        <div class="section-label-col"><h2 class="label">Scope</h2></div>
+        <div>
+          <div class="scope-grid">
+            <div class="scope-col">
+              <p class="scope-title">In scope</p>
+              <ul class="scope-items">
+                <li>Relative material rankings for barrel erosion and EBS lifetime</li>
+                <li>Atomistic yield derivation (RustBCA + LAMMPS AIREBO MD)</li>
+                <li>Field-emission and thermomechanical risk screening</li>
+                <li>3D framework construction and verification</li>
+                <li>Fowler–Nordheim breakdown risk (Weibull model)</li>
+              </ul>
+            </div>
+            <div class="scope-col">
+              <p class="scope-title">Explicitly out of scope</p>
+              <ul class="scope-items">
+                <li>Absolute wear rates</li>
+                <li>ELT-validated lifetimes</li>
+                <li>Dynamic erosion-coupled mesh evolution</li>
+                <li>In-loop DSMC coupling (pending)</li>
+                <li>Flight qualification of any coating</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    import gsap from 'gsap';
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      gsap.utils.toArray('.timeline-item').forEach((item: any, i: number) => {
+        gsap.fromTo(item,
+          { opacity: 0, x: -24 },
+          {
+            scrollTrigger: { trigger: item, start: 'top 88%' },
+            opacity: 1, x: 0, duration: 0.5, ease: 'power2.out', delay: i * 0.07
+          }
+        );
+      });
+    }
+  </script>
 </BaseLayout>

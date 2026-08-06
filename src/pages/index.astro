@@ -1,117 +1,133 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="VIOT — Virtual Ion-Optics Testbed">
-  <section class="hero">
-    <p class="kicker">Project Overview</p>
-    <h1>Virtual Ion-Optics <span class="accent">Testbed</span></h1>
-    <div class="prose" style="margin-top:1.5rem;">
-      <p>A multiscale assessment of carbon-nanomaterial accelerator-grid coatings for charge-exchange (CEX) erosion mitigation in the NASA NSTAR ion thruster.</p>
-    </div>
-  </section>
+<BaseLayout title="VIOT — Virtual Ion-Optics Testbed" page="home">
+  <div class="container">
+    <section class="hero">
+      <p class="hero-eyebrow">Project Overview</p>
+      <h1 data-gsap="hero" aria-label="Virtual Ion-Optics Testbed">
+        {"VIRTUAL ION-OPTICS TESTBED".split('').map(c =>
+          <span class="char" style="opacity:0;">{c === ' ' ? ' ' : c}</span>
+        )}
+      </h1>
+      <p class="hero-sub">
+        A multiscale assessment of carbon-nanomaterial accelerator-grid coatings for charge-exchange (CEX) erosion mitigation in the NASA NSTAR ion thruster.
+      </p>
 
-  <section class="py-section border-top">
-    <div class="grid-2">
-      <h2 class="kicker text-muted">The Problem</h2>
-      <div class="prose">
-        <p>Gridded ion thrusters accelerate Xe⁺ electrostatically. Fast beam ions undergo resonant charge exchange with slow neutrals, creating slow CEX ions born inside the accelerating field. These are pulled into the negatively biased accelerator grid, sputtering it.</p>
-        <p><strong>This is the dominant end-of-life mechanism for ion thrusters.</strong></p>
-        <p>Our research asks: Can thin nanostructured carbon coatings on a conventional Mo grid capture the sputter resistance of bulk carbon grids, without the structural/thermal/manufacturing penalties of monolithic carbon optics?</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="py-section border-top">
-    <p class="kicker" style="margin-bottom:2rem;">Core Hypotheses</p>
-    <div class="card">
-      <div class="card-grid">
-        <span class="card-id">H1</span>
-        <p class="card-stmt">GNP and/or graphene coatings reduce accelerator-grid erosion</p>
-        <div class="card-divider">
-          <span class="card-verdict card-verdict--confirmed">Partially confirmed</span>
-          <p class="card-evidence">GNP reduces erosion 1.39–4.23×. Graphene worsens it (0.37–0.85×, i.e. up to 2.7× more mass loss). Cross-run CV &lt; 0.57% on all 12 cases — the material separation is orders of magnitude above numerical noise.</p>
+      <div class="hero-meta">
+        <div class="hero-stat">
+          <div class="hero-stat-val">36</div>
+          <div class="hero-stat-label">Campaign Runs</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">13.2×</div>
+          <div class="hero-stat-label">Max LEF Gain</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">2.3</div>
+          <div class="hero-stat-label">Onset MV/m</div>
         </div>
       </div>
-    </div>
-    <div class="card" style="margin-top:1rem;">
-      <div class="card-grid">
-        <span class="card-id">H2</span>
-        <p class="card-stmt">Graphene "transparency" diminishes; penetrative energy transfer dominates</p>
-        <div class="card-divider">
-          <span class="card-verdict card-verdict--warning">Confirmed, sign reversed</span>
-          <p class="card-evidence">A heavy Xe ion at CEX energies passes through the monolayer, depositing momentum in the Mo substrate; the low-thermal-coupling sheet cannot dissipate the cascade, so it ejects several carbon atoms per impact and the substrate sputters through it.</p>
+    </section>
+
+    <section>
+      <div class="section-inner">
+        <div class="section-label-col"><h2 class="label">The Problem</h2></div>
+        <div>
+          <h3 class="section-title">The dominant end-of-life mechanism.</h3>
+          <div class="prose-block">
+            <p>Gridded ion thrusters accelerate Xe⁺ electrostatically. Fast beam ions undergo resonant charge exchange with slow neutrals, creating slow CEX ions born inside the accelerating field. These are pulled into the negatively biased accelerator grid, sputtering it.</p>
+            <p>Our research asks: Can thin nanostructured carbon coatings on a conventional Mo grid capture the sputter resistance of bulk carbon grids, without the structural, thermal, and manufacturing penalties of monolithic carbon optics?</p>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="card" style="margin-top:1rem;">
-      <div class="card-grid">
-        <span class="card-id">H3</span>
-        <p class="card-stmt">GNP nanoscale roughness geometrically shadows grazing-angle flux</p>
-        <div class="card-divider">
-          <span class="card-verdict card-verdict--confirmed">Confirmed</span>
-          <p class="card-evidence">Reproduces the suppression of the 60–75° Mo yield peak via RustBCA + Gaussian facet-tilt convolution (σ=15°).</p>
+    </section>
+
+    <section>
+      <div class="section-inner">
+        <div class="section-label-col"><h2 class="label">Core Hypotheses</h2></div>
+        <div class="hyp-list">
+          <div class="hyp-card" data-gsap="hyp">
+            <span class="hyp-num">H1</span>
+            <div>
+              <p class="hyp-stmt">GNP and/or graphene coatings reduce accelerator-grid erosion.</p>
+              <p class="hyp-evidence">GNP reduces erosion 1.39–4.23×. Graphene worsens it (0.37–0.85×, i.e. up to 2.7× more mass loss). Cross-run CV &lt; 0.57% on all 12 cases.</p>
+            </div>
+            <span class="verdict verdict--confirmed">Partially confirmed</span>
+          </div>
+
+          <div class="hyp-card" data-gsap="hyp">
+            <span class="hyp-num">H2</span>
+            <div>
+              <p class="hyp-stmt">Graphene "transparency" diminishes; penetrative energy transfer dominates.</p>
+              <p class="hyp-evidence">Heavy Xe passes through the monolayer, depositing momentum in the Mo substrate; the low-thermal-coupling sheet cannot dissipate the cascade, ejecting C and sputtering Mo.</p>
+            </div>
+            <span class="verdict verdict--warning">Sign reversed</span>
+          </div>
+
+          <div class="hyp-card" data-gsap="hyp">
+            <span class="hyp-num">H3</span>
+            <div>
+              <p class="hyp-stmt">GNP nanoscale roughness geometrically shadows grazing-angle flux.</p>
+              <p class="hyp-evidence">Reproduces the suppression of the 60–75° Mo yield peak via RustBCA + Gaussian facet-tilt convolution (σ=15°).</p>
+            </div>
+            <span class="verdict verdict--confirmed">Confirmed</span>
+          </div>
+
+          <div class="hyp-card" data-gsap="hyp">
+            <span class="hyp-num">H4</span>
+            <div>
+              <p class="hyp-stmt">GNP edge-rich morphology elevates field-emission / vacuum-breakdown risk.</p>
+              <p class="hyp-evidence">Onset field drops from 7.3 → 2.3 MV/m. Fowler–Nordheim Weibull model confirms this is potentially design-limiting.</p>
+            </div>
+            <span class="verdict verdict--limiting">Design-limiting</span>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="card" style="margin-top:1rem;">
-      <div class="card-grid">
-        <span class="card-id">H4</span>
-        <p class="card-stmt">GNP edge-rich morphology elevates field-emission / vacuum-breakdown risk</p>
-        <div class="card-divider">
-          <span class="card-verdict card-verdict--warning">Design-limiting</span>
-          <p class="card-evidence">Onset field drops from 7.3 → 2.3 MV/m. Fowler–Nordheim Weibull model confirms this is potentially design-limiting and partially negates the erosion benefit.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="py-section border-top">
-    <div class="callout">
-      <p class="kicker">Key Insight</p>
-      <h2>H2 Reversal: The Graphene Paradox</h2>
-      <p>Intuition suggests an ultra-hard 2D coating should protect the substrate. Crystalline MD shows the opposite. A heavy Xe ion at CEX energies passes <em>through</em> the monolayer, depositing momentum in the Mo substrate; the low-thermal-coupling sheet cannot dissipate the cascade, so it ejects several carbon atoms per impact <em>and</em> the substrate sputters through it.</p>
-      <p class="highlight">The coating adds an erosion channel instead of removing one.</p>
-    </div>
-  </section>
-
-  <section class="py-section border-top">
-    <p class="kicker" style="margin-bottom:2rem;">Program Phases</p>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Phase</th><th>Content</th><th>Status</th></tr></thead>
-        <tbody>
-          <tr><td class="mono">I</td><td>MATLAB prototype</td><td><span class="text-muted">Superseded</span></td></tr>
-          <tr><td class="mono">II</td><td>VIOT-2 GPU PIC-MCC prototype</td><td><span class="text-muted">Superseded — 15 defects found</span></td></tr>
-          <tr><td class="mono">III</td><td>VIOT-3 axisymmetric production framework</td><td class="text-navy">Complete, 70/70 tests</td></tr>
-          <tr><td class="mono">IV</td><td>VIOT-4 3D + DSMC + MD framework</td><td class="text-navy">Core complete, 2/2 tests</td></tr>
-          <tr><td class="mono">V</td><td>Consolidated manuscript</td><td class="text-navy">Complete (35 pp)</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section class="py-section border-top">
-    <p class="kicker" style="margin-bottom:1.5rem;">Program Scope</p>
-    <div class="grid-2">
-      <div>
-        <h3>In Scope</h3>
-        <ul>
-          <li>Relative material rankings for barrel erosion and EBS lifetime</li>
-          <li>Atomistic yield derivation (RustBCA + LAMMPS MD)</li>
-          <li>Field-emission and thermomechanical risk screening</li>
-          <li>3D framework construction and verification</li>
-        </ul>
+    <section>
+      <div class="callout" data-gsap="callout">
+        <p class="accent-label">Key Insight</p>
+        <h2>The Graphene Paradox</h2>
+        <p>Intuition suggests an ultra-hard 2D coating should protect the substrate. Crystalline MD shows the opposite. A heavy Xe ion at CEX energies passes <em>through</em> the monolayer, depositing momentum in the Mo substrate; the low-thermal-coupling sheet cannot dissipate the cascade, so it ejects several carbon atoms per impact <em>and</em> the substrate sputters through it.</p>
+        <p class="highlight" data-gsap="scramble">The coating adds an erosion channel instead of removing one.</p>
       </div>
-      <div>
-        <h3>Explicitly Out of Scope</h3>
-        <ul>
-          <li>Absolute wear rates</li>
-          <li>ELT-validated lifetimes</li>
-          <li>Dynamic erosion-coupled mesh evolution</li>
-          <li>In-loop DSMC coupling (pending)</li>
-          <li>Flight qualification of any coating</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+    </section>
+  </div>
+
+  <script>
+    import gsap from 'gsap';
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      // 1. Hero diffraction assemble
+      gsap.fromTo('.hero h1 .char',
+        { opacity: 0, y: () => gsap.utils.random(-80, 80), rotation: () => gsap.utils.random(-45, 45) },
+        { opacity: 1, y: 0, rotation: 0, duration: 1.4, stagger: { amount: 0.8, from: 'random' }, ease: 'expo.out' }
+      );
+
+      // 2. Hypothesis stamp
+      gsap.utils.toArray('.hyp-card').forEach((card: any, i) => {
+        gsap.fromTo(card,
+          { opacity: 0, scale: 1.05, y: 20 },
+          {
+            scrollTrigger: { trigger: card, start: 'top 85%' },
+            opacity: 1, scale: 1, y: 0, duration: 0.6, ease: 'back.out(1.4)', delay: i * 0.1
+          }
+        );
+      });
+
+      // 3. Graphene paradox scramble
+      const highlight = document.querySelector('[data-gsap="scramble"]');
+      if (highlight) {
+        const text = highlight.textContent;
+        gsap.fromTo(highlight,
+          { text: "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" },
+          {
+            scrollTrigger: { trigger: highlight, start: 'top 90%' },
+            text: text, duration: 1.5, ease: 'none'
+          }
+        );
+      }
+    }
+  </script>
 </BaseLayout>

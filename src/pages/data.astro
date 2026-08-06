@@ -1,80 +1,167 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="Data & Results — VIOT Research" description="Campaign results, EBS lifetime analysis, and breakdown risk.">
-  <section class="hero">
-    <p class="kicker">Results</p>
-    <h1>Data & Findings</h1>
-    <div class="prose" style="margin-top:1.5rem;">
-      <p>Primary campaign results, EBS lifetime analysis, and Fowler-Nordheim breakdown risk assessment.</p>
-    </div>
-  </section>
+<BaseLayout title="Data & Results — VIOT Research" page="data" description="Erosion campaign, EBS lifetime analysis, and Fowler-Nordheim breakdown risk.">
+  <div class="container">
+    <section class="hero">
+      <p class="hero-eyebrow">Results</p>
+      <h1>Data &amp; Findings</h1>
+      <p class="hero-sub">Primary erosion campaign, electron-backstreaming lifetime analysis, and Fowler–Nordheim breakdown risk assessment. All 36 runs fully reproducible from <code>VIOT3/campaign_results.json</code>.</p>
+    </section>
 
-  <!-- Campaign -->
-  <section class="py-section border-top">
-    <h2>Comparative Erosion Campaign</h2>
-    <p class="prose" style="margin-bottom:1.5rem;">36 runs = 3 materials × 4 throttles × 3 seeds. N=1e5, stride 10, DX=10 µm, 5,000 steps, NX=221 domain. Full per-seed data in documentation file 02.</p>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th>Throttle</th><th>I_b (A)</th><th>Mo (atoms)</th><th>GNP (atoms)</th><th>Graphene (atoms)</th><th class="text-navy">GNP LEF</th><th class="text-accent">Graphene LEF</th></tr>
-        </thead>
-        <tbody>
-          <tr><td class="mono">TH0</td><td class="mono">0.51</td><td class="mono">6.827e10</td><td class="mono">1.740e10</td><td class="mono">1.841e11</td><td class="text-navy">3.92×</td><td class="text-accent">0.37×</td></tr>
-          <tr><td class="mono">TH5</td><td class="mono">0.84</td><td class="mono">1.124e12</td><td class="mono">2.657e11</td><td class="mono">1.988e12</td><td class="text-navy">4.23×</td><td class="text-accent">0.57×</td></tr>
-          <tr><td class="mono">TH10</td><td class="mono">1.10</td><td class="mono">4.435e12</td><td class="mono">1.579e12</td><td class="mono">6.293e12</td><td class="text-navy">2.81×</td><td class="text-accent">0.70×</td></tr>
-          <tr><td class="mono">TH15</td><td class="mono">1.76</td><td class="mono">3.730e13</td><td class="mono">2.679e13</td><td class="mono">4.404e13</td><td class="text-navy">1.39×</td><td class="text-accent">0.85×</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="text-small" style="margin-top:1rem;">GNP reduces erosion <strong class="text-navy">1.39–4.23×</strong>; graphene <strong class="text-accent">worsens</strong> it (0.37–0.85×, i.e. up to 2.7× more mass loss). Cross-run CV &lt; 0.57% on all 12 cases.</p>
-    <p class="text-small" style="margin-top:0.5rem;">The GNP benefit peaks at TH5 and decays monotonically to TH15 — the shadowing advantage lives at grazing incidence; at higher throttle the CEX energy distribution shifts and normal-incidence yield dominates.</p>
-  </section>
+    <section>
+      <div class="section-inner">
+        <div class="section-label-col">
+          <h2 class="label">Erosion Campaign</h2>
+          <p style="font-size:0.8rem;color:var(--muted);font-family:var(--font-mono);line-height:1.5;margin-top:1rem;">36 runs<br>3 materials<br>4 throttles<br>3 seeds<br>N=1e5<br>DX=10 µm<br>5,000 steps</p>
+        </div>
+        <div>
+          <p class="label">Comparative erosion — atoms sputtered per run</p>
+          <div class="table-wrap" data-gsap="table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Throttle</th>
+                  <th>I_b (A)</th>
+                  <th>Mo (atoms)</th>
+                  <th>GNP (atoms)</th>
+                  <th>Graphene (atoms)</th>
+                  <th>GNP LEF</th>
+                  <th>Graphene LEF</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>TH0</td><td>0.51</td><td>6.827e10</td><td>1.740e10</td><td>1.841e11</td>
+                  <td class="td-navy">3.92×</td><td class="td-bad">0.37×</td>
+                </tr>
+                <tr>
+                  <td>TH5</td><td>0.84</td><td>1.124e12</td><td>2.657e11</td><td>1.988e12</td>
+                  <td class="td-navy">4.23×</td><td class="td-bad">0.57×</td>
+                </tr>
+                <tr>
+                  <td>TH10</td><td>1.10</td><td>4.435e12</td><td>1.579e12</td><td>6.293e12</td>
+                  <td class="td-navy">2.81×</td><td class="td-bad">0.70×</td>
+                </tr>
+                <tr>
+                  <td>TH15</td><td>1.76</td><td>3.730e13</td><td>2.679e13</td><td>4.404e13</td>
+                  <td class="td-navy">1.39×</td><td class="td-bad">0.85×</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size:0.8rem;color:var(--muted);font-family:var(--font-mono);margin-top:0.75rem;">GNP LEF = Mo erosion / GNP erosion. Values &gt;1 mean GNP reduces erosion. Values &lt;1 for Graphene mean graphene <em>worsens</em> erosion. CV &lt; 0.57% across all 12 cases.</p>
+        </div>
+      </div>
+    </section>
 
-  <!-- EBS -->
-  <section class="py-section border-top">
-    <h2>Electron-Backstreaming Lifetime</h2>
-    <p class="prose" style="margin-bottom:1.5rem;">10-seed ensemble, N=2e5, TH10, NX=117 domain. The mission-relevant metric for end-of-life.</p>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th>Coating</th><th>φ_m (V)</th><th>dφ_m/dr (V/m)</th><th>dr/dt (m/s)</th><th>dφ_m/dt (V/s)</th><th class="text-navy">LEF_EBS</th></tr>
-        </thead>
-        <tbody>
-          <tr><td class="mono">Mo</td><td class="mono">8.95</td><td class="mono">7.367e5</td><td class="mono">4.309e-8</td><td class="mono">3.148e-2</td><td class="mono">1.0×</td></tr>
-          <tr><td class="mono">GNP</td><td class="mono">8.95</td><td class="mono">7.367e5</td><td class="mono">3.270e-9</td><td class="mono">2.389e-3</td><td class="text-navy">13.18×</td></tr>
-          <tr><td class="mono">Graphene</td><td class="mono">8.85</td><td class="mono">7.367e5</td><td class="mono">6.382e-8</td><td class="mono">4.702e-2</td><td class="text-accent">0.669×</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="text-small" style="margin-top:1rem;">GNP extends EBS-limited life <strong class="text-navy">6.6× (gross yield) to 13.2× (net, f_redep=0.5)</strong>; graphene shortens it to 0.67×. Barrier depth = 1091.15 V.</p>
-    <p class="text-small" style="margin-top:0.5rem;"><strong>Internal cross-check:</strong> dφ_m/dr = 736,719.386 V/m is identical to machine precision across all three coatings — the barrier is set by electrode geometry, not surface material. 95% CI widths: ~0.5% of mean.</p>
-  </section>
+    <section>
+      <div class="section-inner">
+        <div class="section-label-col">
+          <h2 class="label">EBS Lifetime</h2>
+          <p style="font-size:0.8rem;color:var(--muted);font-family:var(--font-mono);line-height:1.5;margin-top:1rem;">10 seeds<br>N=2e5<br>TH10<br>NX=117<br>Barrier depth<br>1091.15 V</p>
+        </div>
+        <div>
+          <p class="label">Electron-backstreaming lifetime factor (LEF_EBS)</p>
+          <div class="table-wrap" data-gsap="table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Coating</th>
+                  <th>φ_m (V)</th>
+                  <th>dφ_m/dr (V/m)</th>
+                  <th>dr/dt (m/s)</th>
+                  <th>dφ_m/dt (V/s)</th>
+                  <th>LEF_EBS</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Mo (baseline)</td><td>8.95</td><td>7.367e5</td><td>4.309e-8</td><td>3.148e-2</td>
+                  <td>1.0×</td>
+                </tr>
+                <tr>
+                  <td>GNP</td><td>8.95</td><td>7.367e5</td><td>3.270e-9</td><td>2.389e-3</td>
+                  <td class="td-navy">13.18×</td>
+                </tr>
+                <tr>
+                  <td>Graphene</td><td>8.85</td><td>7.367e5</td><td>6.382e-8</td><td>4.702e-2</td>
+                  <td class="td-bad">0.669×</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size:0.8rem;color:var(--muted);font-family:var(--font-mono);margin-top:0.75rem;">Internal cross-check: dφ_m/dr = 736,719.386 V/m identical to machine precision across all three coatings — validates that LEF_EBS differences come purely from erosion rates. 95% CI widths: ~0.5% of mean.</p>
+        </div>
+      </div>
+    </section>
 
-  <!-- FN Risk -->
-  <section class="py-section border-top">
-    <h2>Fowler–Nordheim Breakdown Risk</h2>
-    <p class="prose" style="margin-bottom:1.5rem;">GNP's edge-rich morphology drops measurable breakdown onset — potentially design-limiting.</p>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th>Material</th><th>φ (eV)</th><th>Weibull λ</th><th>Weibull k</th><th class="text-destructive">Onset (P>1e-4)</th><th>P_BD @ 15 MV/m</th></tr>
-        </thead>
-        <tbody>
-          <tr><td class="mono">Mo</td><td class="mono">4.6</td><td class="mono">100</td><td class="mono">2.0</td><td class="text-destructive">7.27 MV/m</td><td class="mono">0.15</td></tr>
-          <tr><td class="mono">Graphene</td><td class="mono">4.5</td><td class="mono">150</td><td class="mono">1.8</td><td class="text-destructive">4.01 MV/m</td><td class="mono">0.44</td></tr>
-          <tr><td class="mono">GNP</td><td class="mono">4.5</td><td class="mono">200</td><td class="mono">1.5</td><td class="text-destructive">2.26 MV/m</td><td class="mono">0.58</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="text-small" style="margin-top:1rem;">GNP drops breakdown onset from ~7.3 to ~2.3 MV/m. Context: NSTAR nominal inter-grid field ≈ 1.9 MV/m. Rim field enhancement (β ~2–10 for machined edges, ~70 for nanostructures) pushes local field into the 2.3–7.3 MV/m divergence band.</p>
-  </section>
+    <section>
+      <div class="section-inner">
+        <div class="section-label-col">
+          <h2 class="label">Breakdown Risk</h2>
+          <p style="font-size:0.8rem;color:var(--muted);font-family:var(--font-mono);line-height:1.5;margin-top:1rem;">Fowler–Nordheim<br>Weibull model<br>NSTAR nominal<br>≈1.9 MV/m</p>
+        </div>
+        <div>
+          <p class="label">Fowler–Nordheim vacuum breakdown — Weibull parameters</p>
+          <div class="table-wrap" data-gsap="table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Material</th>
+                  <th>φ (eV)</th>
+                  <th>Weibull λ</th>
+                  <th>Weibull k</th>
+                  <th>Onset (P&gt;1e-4)</th>
+                  <th>P_BD @ 15 MV/m</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Mo</td><td>4.6</td><td>100</td><td>2.0</td>
+                  <td>7.27 MV/m</td><td>0.15</td>
+                </tr>
+                <tr>
+                  <td>Graphene</td><td>4.5</td><td>150</td><td>1.8</td>
+                  <td class="td-accent">4.01 MV/m</td><td class="td-accent">0.44</td>
+                </tr>
+                <tr>
+                  <td>GNP</td><td>4.5</td><td>200</td><td>1.5</td>
+                  <td class="td-bad">2.26 MV/m</td><td class="td-bad">0.58</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p style="font-size:0.8rem;color:var(--muted);font-family:var(--font-mono);margin-top:0.75rem;">NSTAR nominal inter-grid field ≈ 1.9 MV/m. Rim field enhancement β ~2–10 for machined edges, ~70 for sharp nanostructures — can push local field into the 2.3–7.3 MV/m divergence band.</p>
+        </div>
+      </div>
+    </section>
 
-  <!-- Key Result -->
-  <section class="py-section border-top">
-    <div class="callout" style="border-radius:12px; padding:2rem;">
-      <p class="kicker">Summary</p>
-      <p>GNP is the clear winner for erosion mitigation (up to 4.23×) and EBS lifetime extension (up to 13.2×), but its edge morphology introduces a breakdown risk that drops onset to 2.26 MV/m. Graphene is actively harmful across all throttles — it adds an erosion channel instead of removing one.</p>
-    </div>
-  </section>
+    <section>
+      <div class="callout">
+        <p class="accent-label">Summary</p>
+        <h2>GNP wins on erosion. GNP is risky on breakdown.</h2>
+        <p>GNP reduces erosion 1.39–4.23× and extends EBS-limited life up to 13.18×. Its edge-rich morphology drops breakdown onset from 7.3 to 2.3 MV/m — partially negating the benefit. Graphene is actively harmful at all throttles: it adds an erosion channel and shortens EBS life to 0.669×.</p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    import gsap from 'gsap';
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      // Table row draw animation
+      document.querySelectorAll('[data-gsap="table"]').forEach((table) => {
+        const rows = table.querySelectorAll('tbody tr');
+        rows.forEach((row, i) => {
+          gsap.fromTo(row,
+            { opacity: 0, x: -16 },
+            {
+              scrollTrigger: { trigger: row, start: 'top 90%' },
+              opacity: 1, x: 0, duration: 0.4, ease: 'power2.out', delay: i * 0.06
+            }
+          );
+        });
+      });
+    }
+  </script>
 </BaseLayout>

@@ -1,77 +1,97 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="People — VIOT Research" description="Principal Investigator and research context.">
-  <section class="hero">
-    <p class="kicker">People</p>
-    <h1>Principal Investigator</h1>
-  </section>
+<BaseLayout title="People — VIOT Research" page="about" description="Principal Investigator profile and complete documentation record.">
+  <div class="container">
+    <section class="hero">
+      <p class="hero-eyebrow">People</p>
+      <h1>Principal Investigator</h1>
+      <p class="hero-sub">Shantanu Pawar — Department of Mechanical Engineering, PVG's College of Engineering, Technology and Management, Pune, India.</p>
+    </section>
 
-  <section class="py-section border-top">
-    <div class="grid-2">
-      <div>
-        <div style="width:100%;aspect-ratio:1;border-radius:12px;background:var(--panel-2);border:1px solid var(--edge);display:flex;align-items:center;justify-content:center;margin-bottom:1.5rem;">
-          <span style="font-family:var(--font-serif);font-size:4rem;color:var(--navy);opacity:0.15;">SP</span>
+    <section>
+      <div class="section-inner">
+        <div class="section-label-col"><h2 class="label">Profile</h2></div>
+        <div>
+          <h3 class="section-title">Author of the Virtual Ion-Optics Testbed (VIOT)</h3>
+          <div class="prose-block">
+            <p>The VIOT research program is a multiscale assessment of carbon-nanomaterial accelerator-grid coatings for charge-exchange (CEX) erosion mitigation in the NASA NSTAR ion thruster.</p>
+            <p>Research stack:</p>
+            <ul>
+              <li><strong>Plasma Physics:</strong> GPU PIC-MCC (Particle-in-Cell with Monte Carlo Collisions) simulations.</li>
+              <li><strong>Atomistic Modeling:</strong> LAMMPS AIREBO crystalline Molecular Dynamics for ion-surface interactions.</li>
+              <li><strong>Computational Engineering:</strong> Custom 3D Poisson solvers and DSMC (Direct Simulation Monte Carlo) pipelines.</li>
+            </ul>
+          </div>
         </div>
-        <h3 style="font-size:1.4rem;">Shantanu Pawar</h3>
-        <p class="text-small" style="margin-top:0.5rem;">
-          Dept. of Mechanical Engineering<br>
-          PVG's College of Engineering, Technology and Management<br>
-          Pune, Maharashtra, India
-        </p>
       </div>
-      <div class="prose" style="font-size:1rem;">
-        <p>Sole author of the Virtual Ion-Optics Testbed (VIOT) research program. The work focuses on the multiscale assessment of carbon-nanomaterial accelerator-grid coatings for charge-exchange (CEX) erosion mitigation in the NASA NSTAR ion thruster.</p>
-        <p>The research combines:</p>
-        <ul>
-          <li><strong>Plasma Physics:</strong> GPU PIC-MCC (Particle-in-Cell with Monte Carlo Collisions) simulations.</li>
-          <li><strong>Atomistic Modeling:</strong> LAMMPS AIREBO crystalline Molecular Dynamics for ion-surface interactions.</li>
-          <li><strong>Computational Engineering:</strong> Custom 3D Poisson solvers and DSMC (Direct Simulation Monte Carlo) pipelines.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="py-section border-top">
-    <h2>Research Timeline</h2>
-    <div class="grid-3" style="margin-top:1.5rem;">
-      <div class="card">
-        <h3>2024</h3>
-        <p class="text-small">Phase I: MATLAB prototype. Phase II: VIOT-2 GPU PIC-MCC prototype. 15 defects discovered.</p>
+    <section>
+      <div class="section-inner">
+        <div class="section-label-col"><h2 class="label">Program Timeline</h2></div>
+        <div class="grid-cells cols-3">
+          <div>
+            <h3>2024</h3>
+            <p style="font-size:0.9rem;color:var(--muted);margin-top:0.5rem;line-height:1.5;">Phase I: MATLAB prototype.<br>Phase II: VIOT-2 GPU PIC-MCC prototype.<br>15 defects discovered.</p>
+          </div>
+          <div>
+            <h3>2025</h3>
+            <p style="font-size:0.9rem;color:var(--muted);margin-top:0.5rem;line-height:1.5;">Phase III: VIOT-3 axisymmetric production framework. 70/70 tests pass.<br>Phase IV: VIOT-4 3D + DSMC + MD framework initiated.</p>
+          </div>
+          <div>
+            <h3>2026</h3>
+            <p style="font-size:0.9rem;color:var(--muted);margin-top:0.5rem;line-height:1.5;">Phase V: Consolidated manuscript (35 pages).<br>VIOT-4 core complete.<br>Campaign results finalized.</p>
+          </div>
+        </div>
       </div>
-      <div class="card">
-        <h3>2025</h3>
-        <p class="text-small">Phase III: VIOT-3 axisymmetric production framework. 70/70 tests pass. Phase IV: VIOT-4 3D + DSMC + MD framework initiated.</p>
-      </div>
-      <div class="card">
-        <h3>2026</h3>
-        <p class="text-small">Phase V: Consolidated manuscript (35 pp). VIOT-4 core complete. Campaign results finalized.</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="py-section border-top">
-    <h2>Documentation Record</h2>
-    <p class="prose" style="margin-bottom:1.5rem;">Every number, parameter, algorithm, file, result, and known defect of the VIOT program — sufficient to reproduce the work from scratch or audit any claim in the manuscript.</p>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>File</th><th>Contents</th></tr></thead>
-        <tbody>
-          <tr><td class="mono">01_Project_Overview.md</td><td>Research question, hypotheses H1–H4, scope, timeline, current status</td></tr>
-          <tr><td class="mono">02_Data_Campaign_Results.md</td><td>All 36 campaign simulations, per-seed raw erosion, LEF derivation</td></tr>
-          <tr><td class="mono">03_Data_EBS_Analysis.md</td><td>10-seed electron-backstreaming ensemble, barrier physics, LEF_EBS</td></tr>
-          <tr><td class="mono">04_Data_Yield_Tables.md</td><td>All 7 sputter-yield tables, RustBCA + LAMMPS generation parameters</td></tr>
-          <tr><td class="mono">05_Data_Neutral_DSMC.md</td><td>Analytic view factor vs DSMC benchmark, the 44.4% deviation</td></tr>
-          <tr><td class="mono">06_Physics_and_Math.md</td><td>Every governing equation, constant, and derivation used</td></tr>
-          <tr><td class="mono">07_Codebase_VIOT3.md</td><td>Axisymmetric framework: file-by-file, every module, every API</td></tr>
-          <tr><td class="mono">08_Codebase_VIOT4.md</td><td>3D framework: file-by-file, DSMC, MD pipeline, 3D Poisson</td></tr>
-          <tr><td class="mono">09_Verification_and_Tests.md</td><td>All 70 tests + 2 VIOT-4 tests, what each asserts, all results</td></tr>
-          <tr><td class="mono">10_Results_Summary.md</td><td>Every headline result with its provenance chain</td></tr>
-          <tr><td class="mono">11_Empirical_Reference_Data.md</td><td>NSTAR ELT data, published sputter yields, grid geometries</td></tr>
-          <tr><td class="mono">12_Framework_Comparison.md</td><td>VIOT vs. existing tools (Orbitrap, ONERA, etc.)</td></tr>
-          <tr><td class="mono">13–17</td><td>Manuscript history, known issues, reproducibility, references, inventory</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+    <section>
+      <div class="section-inner">
+        <div class="section-label-col">
+          <h2 class="label">Documentation</h2>
+          <p style="font-size:0.8rem;color:var(--muted);font-family:var(--font-mono);line-height:1.5;margin-top:1rem;">17 files<br>Every number, parameter, and algorithm</p>
+        </div>
+        <div>
+          <p class="label">Complete research record</p>
+          <div class="table-wrap" data-gsap="table">
+            <table>
+              <thead><tr><th>File</th><th>Contents</th></tr></thead>
+              <tbody>
+                <tr><td class="mono text-navy">01_Project_Overview.md</td><td>Research question, H1–H4, scope, timeline</td></tr>
+                <tr><td class="mono text-navy">02_Data_Campaign_Results.md</td><td>36 campaign simulations, raw erosion, LEF derivation</td></tr>
+                <tr><td class="mono text-navy">03_Data_EBS_Analysis.md</td><td>10-seed ensemble, barrier physics, LEF_EBS</td></tr>
+                <tr><td class="mono text-navy">04_Data_Yield_Tables.md</td><td>7 sputter-yield tables, RustBCA + LAMMPS parameters</td></tr>
+                <tr><td class="mono text-navy">05_Data_Neutral_DSMC.md</td><td>Analytic view factor vs DSMC benchmark, 44.4% deviation</td></tr>
+                <tr><td class="mono text-navy">06_Physics_and_Math.md</td><td>Every governing equation, constant, and derivation</td></tr>
+                <tr><td class="mono text-navy">07_Codebase_VIOT3.md</td><td>Axisymmetric framework: modules, API</td></tr>
+                <tr><td class="mono text-navy">08_Codebase_VIOT4.md</td><td>3D framework: DSMC, MD pipeline, 3D Poisson</td></tr>
+                <tr><td class="mono text-navy">09_Verification_and_Tests.md</td><td>70+2 tests, assertions, all results</td></tr>
+                <tr><td class="mono text-navy">10_Results_Summary.md</td><td>Every headline result with its provenance chain</td></tr>
+                <tr><td class="mono text-navy">11_Empirical_Reference_Data.md</td><td>NSTAR ELT data, yields, geometries</td></tr>
+                <tr><td class="mono text-navy">12_Framework_Comparison.md</td><td>VIOT vs. Orbitrap, ONERA</td></tr>
+                <tr><td class="mono text-navy">13-17</td><td>Manuscript history, limitations, reproducibility, references</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    import gsap from 'gsap';
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll('[data-gsap="table"]').forEach((table) => {
+        const rows = table.querySelectorAll('tbody tr');
+        rows.forEach((row, i) => {
+          gsap.fromTo(row,
+            { opacity: 0, x: -16 },
+            { scrollTrigger: { trigger: row, start: 'top 90%' }, opacity: 1, x: 0, duration: 0.4, ease: 'power2.out', delay: i * 0.05 }
+          );
+        });
+      });
+    }
+  </script>
 </BaseLayout>
